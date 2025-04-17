@@ -1,0 +1,150 @@
+/* Global Styles */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Card Styles */
+.card {
+    transition: transform 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Form Styles */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+/* Custom Badge Colors */
+.badge.bg-lost {
+    background-color: var(--danger-color);
+}
+
+.badge.bg-found {
+    background-color: var(--success-color);
+}
+
+/* Item Details Page */
+.item-image {
+    max-height: 400px;
+    object-fit: cover;
+}
+
+.user-info {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 15px;
+}
+
+/* Custom Alert Styles */
+.alert {
+    border-radius: 10px;
+}
+
+/* Dashboard Styles */
+.dashboard-card {
+    border-left: 4px solid var(--primary-color);
+}
+
+.dashboard-card.lost {
+    border-left-color: var(--danger-color);
+}
+
+.dashboard-card.found {
+    border-left-color: var(--success-color);
+}
+
+.dashboard-card.matches {
+    border-left-color: var(--warning-color);
+}
+
+/* Matches Display */
+.match-score {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.match-score.high {
+    background-color: var(--success-color);
+}
+
+.match-score.medium {
+    background-color: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.match-score.low {
+    background-color: var(--danger-color);
+}
+
+/* Admin Panel Styles */
+.sidebar {
+    min-height: calc(100vh - 56px);
+    background-color: var(--dark-color);
+}
+
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.75);
+    padding: 0.75rem 1rem;
+    border-left: 4px solid transparent;
+}
+
+.sidebar .nav-link:hover,
+.sidebar .nav-link.active {
+    color: white;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: var(--primary-color);
+}
+
+/* Footer Styles */
+footer {
+    margin-top: 100px !important;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .item-image {
+        max-height: 300px;
+    }
+    
+    .match-score {
+        width: 50px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
