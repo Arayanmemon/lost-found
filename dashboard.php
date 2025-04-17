@@ -23,11 +23,11 @@ $user = $userObj->getUserById($userId);
 // Initialize Item class
 $itemObj = new Item();
 
-// Get user's lost items
-$lostItems = $itemObj->getItems('lost', null, $userId);
+// Get user's lost items - pass null for status to get all items
+$lostItems = $itemObj->getItems('lost', null, $userId, null);
 
-// Get user's found items
-$foundItems = $itemObj->getItems('found', null, $userId);
+// Get user's found items - pass null for status to get all items
+$foundItems = $itemObj->getItems('found', null, $userId, null);
 
 // Get potential matches for user's items
 $matches = [];
@@ -81,6 +81,22 @@ $topMatches = array_slice($matches, 0, 5);
     <?php include 'templates/navbar.php'; ?>
     
     <div class="container my-5">
+        <?php if (isset($_SESSION['success_message'])): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <i class="fas fa-check-circle me-2"></i><?php echo $_SESSION['success_message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['success_message']); ?>
+        <?php endif; ?>
+        
+        <?php if (isset($_SESSION['error_message'])): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <i class="fas fa-exclamation-circle me-2"></i><?php echo $_SESSION['error_message']; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php unset($_SESSION['error_message']); ?>
+        <?php endif; ?>
+        
         <div class="row mb-4">
             <div class="col-md-8">
                 <h1 class="mb-0">Dashboard</h1>
@@ -285,9 +301,6 @@ $topMatches = array_slice($matches, 0, 5);
                                             <a href="item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-primary me-1" title="View Details">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit-item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-secondary me-1" title="Edit Item">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
                                             <?php if ($item['status'] === 'open'): ?>
                                                 <a href="close-item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-success" title="Mark as Found">
                                                     <i class="fas fa-check"></i>
@@ -362,14 +375,11 @@ $topMatches = array_slice($matches, 0, 5);
                                             <a href="item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-primary me-1" title="View Details">
                                                 <i class="fas fa-eye"></i>
                                             </a>
-                                            <a href="edit-item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-secondary me-1" title="Edit Item">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <?php if ($item['status'] === 'open'): ?>
+                                            <!-- <?php if ($item['status'] === 'open'): ?>
                                                 <a href="close-item.php?id=<?php echo $item['item_id']; ?>" class="btn btn-sm btn-outline-success" title="Mark as Returned">
                                                     <i class="fas fa-check"></i>
                                                 </a>
-                                            <?php endif; ?>
+                                            <?php endif; ?> -->
                                         </td>
                                     </tr>
                                 <?php endforeach; ?>

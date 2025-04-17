@@ -47,7 +47,7 @@ $isLoggedIn = $userObj->isLoggedIn();
     <?php include 'templates/navbar.php'; ?>
     
     <!-- Hero Section -->
-    <div class="container-fluid bg-primary text-white py-5">
+    <div class="container-fluid bg-secondary text-white py-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6">
@@ -62,7 +62,7 @@ $isLoggedIn = $userObj->isLoggedIn();
                     <?php endif; ?>
                 </div>
                 <div class="col-md-6 text-center">
-                    <img src="<?php echo ASSETS_URL; ?>images/lost-found.svg" alt="Lost and Found" class="img-fluid" style="max-height: 300px;">
+                    <img src="<?php echo ASSETS_URL; ?>images/lost-found.svg" alt="Lost and Found" class="img-fluid" style="max-height: 300px;color: white;">
                 </div>
             </div>
         </div>

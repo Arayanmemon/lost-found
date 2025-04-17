@@ -137,6 +137,16 @@ class Item {
         }
         
         $item = $this->db->fetch($stmt);
+        $sql = "SELECT i.*, 
+               u.username, u.email, u.full_name, u.phone, 
+               c.name AS category_name 
+        FROM items i 
+        LEFT JOIN users u ON i.user_id = u.user_id 
+        LEFT JOIN categories c ON i.category_id = c.category_id 
+        WHERE i.item_id = ?";
+        $stmt = $this->db->query($sql, [$itemId]);
+        $item = $this->db->fetch($stmt);
+        // var_dump($item); exit;
         error_log("Item fetched successfully: " . json_encode($item));
         
         $this->db->closeStatement($stmt);
@@ -227,7 +237,7 @@ class Item {
         
         $sql = "UPDATE items SET status = 'closed' WHERE item_id = ?";
         $stmt = $this->db->query($sql, [$itemId]);
-        
+        // var_dump($stmt); exit;
         return $stmt ? 
             ['success' => true, 'message' => 'Item marked as resolved.'] : 
             ['success' => false, 'message' => 'Failed to update item status. Please try again.'];
@@ -291,14 +301,24 @@ class Item {
     private function isOwner($itemId, $userId) {
         $sql = "SELECT user_id FROM items WHERE item_id = ?";
         $stmt = $this->db->query($sql, [$itemId]);
-        
-        if (!$stmt || $this->db->numRows($stmt) == 0) {
+    
+        if (!$stmt) {
+            error_log("Query failed in isOwner()");
             return false;
         }
-        
+    
+        // Try forcing to fetch all rows or free result before moving on
         $item = $this->db->fetch($stmt);
+        $this->db->closeStatement($stmt); // Ensure you close the statement here
+    
+        if (!$item) {
+            error_log("Item not found in isOwner()");
+            return false;
+        }
+    
         return $item['user_id'] == $userId;
     }
+    
     
     // Check if user is an admin
     private function isAdmin($userId) {

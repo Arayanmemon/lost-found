@@ -1,4 +1,11 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<?php
+// Make sure $userObj is defined to avoid the fatal error
+if (!isset($userObj)) {
+    require_once __DIR__ . '/../includes/user.php';
+    $userObj = new User();
+}
+?>
+<nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
     <div class="container">
         <a class="navbar-brand" href="index.php">
             <i class="fas fa-search me-2"></i>
@@ -47,7 +54,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownUser">
                             <li><a class="dropdown-item" href="dashboard.php">My Dashboard</a></li>
-                            <li><a class="dropdown-item" href="profile.php">Profile Settings</a></li>
+                            <!-- <li><a class="dropdown-item" href="profile.php">Profile Settings</a></li> -->
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                         </ul>
